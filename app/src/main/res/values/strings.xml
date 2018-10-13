@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">DistressNet-NG</string>
+    <string name="madoop_name">Madoop</string>
+    <string name="datanode">DataNode</string>
+    <string name="tasktracker">TaskTracker</string>
+    <string name="reset">Reset</string>
+    <string name="runjob">Run Job</string>
+    <string name="upload">Upload</string>
+    <string name="menu_about">About</string>
+    <string name="menu_quit">Quit</string>
+    <string name="main_menu">Menu</string>
+    <string name="menu_test">Train</string>
+</resources>

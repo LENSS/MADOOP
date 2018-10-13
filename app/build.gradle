@@ -1,0 +1,54 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "edu.tamu.lenss.distressnet_ng"
+        minSdkVersion 24
+        targetSdkVersion 27
+        buildConfigField "long", "TIMESTAMP", System.currentTimeMillis() + "L"
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        externalNativeBuild {
+            cmake {
+                cppFlags "-frtti -fexceptions"
+            }
+        }
+
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+//            moduleName "detection_based_tracker"
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    compile project(':openCVLibrary320')
+    compile project(':lib-dlib')
+    implementation 'de.mindpipe.android:android-logging-log4j:1.0.3'
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.google.android.gms:play-services-vision:15.0.1'
+    compile project(path: ':sphelper')
+    compile 'com.daimajia.numberprogressbar:library:1.4@aar'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+}

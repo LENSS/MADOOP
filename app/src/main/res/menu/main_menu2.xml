@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--<item android:id="@+id/main_menu"-->
+        <!--android:title="@string/main_menu" >-->
+        <!-- "file" submenu -->
+        <!--<menu>-->
+    <item
+        android:id="@+id/menu_setip"
+        android:title="Input Local IP"
+        />
+
+    <item
+        android:id="@+id/menu_datanode"
+        android:checkable="true"
+        android:title="@string/datanode"
+        />
+
+    <item
+        android:id="@+id/menu_tasktracker"
+        android:checkable="true"
+        android:title="@string/tasktracker"
+    />
+
+    <item
+        android:id="@+id/menu_purgeDFS"
+        android:title="Purge DFS"
+        />
+
+    <item android:id="@+id/menu_about"
+        android:title="@string/menu_about" />
+
+</menu>
+    <!--app:actionViewClass="android.widget.CheckBox"-->
+    <!--app:showAsAction="ifRoom|withText" -->

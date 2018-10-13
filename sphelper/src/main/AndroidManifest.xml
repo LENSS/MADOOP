@@ -1,0 +1,12 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.pl.sphelper">
+
+    <application android:allowBackup="true" android:label="@string/app_name"
+        android:supportsRtl="true">
+        <provider
+            android:name=".SPContentProvider"
+            android:authorities="com.pl.sphelper"
+            android:process=":sphelper"
+            android:exported="false" />
+    </application>
+
+</manifest>
