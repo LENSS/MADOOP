@@ -24,8 +24,10 @@ Mobile Hadoop and MapReduce
 - Use `adb install app-debug.apk` command to install the app to a phone.  
 
 #### Setting the phone (MADOOP_client) before using MADOOP
-- For the application to work, this folder must be copied to every phone. `/sdcard/Documents/Madoop4/`. However, there are 3 folders inside this folder: input, faces and temp which to be emptied before usage.
-- The face pictures should be stored in `/sdcard/StreamFDPic/` folder. Use command adb pull to pull the content. Use push command to copy folder from computer to phone.  `adb push gns_workplace/Madoop4 /sdcard/Documents/`
+- The assiciated files to run MADDOP are stored in `/MADOOP_Client/Associated_Files` folder.
+- The Madoop facerecognition app requires a face-database. Store these 3 files `facemodel.xml`, `mask.jpg` and `shape_predictor_68_face_landmarks.dat` files in `/sdcard/Documents/Madoop4/` folder of each phone that uses this App. Use command `adb push` to transfer the files.
+- Also, in the same folder, create 3 empty folders: with the names: `input`, `faces` and `temp`. These 3 foders must be empty.
+- The face pictures which are to be recognized against the data base, should be stored in `/sdcard/StreamFDPic/` folder. Use command adb pull to pull the content. Check Sample photos folder.
 
 ## Instructions for Madoop Server
 
