@@ -1,5 +1,5 @@
 # MADOOP
-Mobile Hadoop and MapReduce
+This application is an example of Mobile Edge Computing using Mobile Hadoop and MapReduce. 
 
 
 ## Network Architecture
