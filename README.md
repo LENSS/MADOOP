@@ -56,6 +56,8 @@ This application is an example of Mobile Edge Computing using Mobile Hadoop and 
 - Check the status using command `sudo service dnsmasq status`
 
 
+#### Setup for LTE interface
+- The phones connected to LTE also need this DNS service such that they can communicate using hostname.In the current setup, [NextEPC](http://nextepc.org) is used to configure the EPC. Its configuration file is stored in `/etc/nextepc/pgw.conf`. To point to the local DNS server, edit the lines under `dns:`. 
 
 
 #### Running MADOOP Server
