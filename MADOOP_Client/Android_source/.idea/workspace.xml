@@ -34,8 +34,8 @@
       <file leaf-file-name="Main2Activity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/tamu/lenss/madoop4/Main2Activity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="536">
-              <caret line="1424" column="57" selection-start-line="1424" selection-start-column="57" selection-end-line="1424" selection-end-column="57" />
+            <state relative-caret-position="266">
+              <caret line="1418" column="32" selection-start-line="1418" selection-start-column="27" selection-end-line="1418" selection-end-column="32" />
               <folding>
                 <element signature="e#10957#11201#0" expanded="true" />
                 <element signature="e#11200#11201#0" expanded="true" />
@@ -5163,10 +5163,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="65" />
-    <option name="y" value="-4" />
-    <option name="width" value="2495" />
-    <option name="height" value="1444" />
+    <option name="x" value="2406" />
+    <option name="y" value="521" />
+    <option name="width" value="1248" />
+    <option name="height" value="57" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -5349,8 +5349,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-1444" width="2495" height="1444" extended-state="6" />
-    <editor active="true" />
+    <frame x="2625" y="412" width="1215" height="1028" extended-state="6" />
     <layout>
       <window_info anchor="bottom" id="Android Profiler" order="7" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -5363,11 +5362,11 @@
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32927758" />
-      <window_info active="true" anchor="bottom" id="Logcat" order="7" visible="true" weight="0.32927758" />
+      <window_info active="true" anchor="bottom" id="Logcat" order="7" visible="true" weight="0.48164627" />
       <window_info id="Captures" order="2" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20702328" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.43370402" />
       <window_info anchor="bottom" id="Build" order="7" weight="0.32243347" />
       <window_info anchor="right" id="Gradle" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -5613,8 +5612,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/tamu/lenss/madoop4/Main2Activity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="536">
-          <caret line="1424" column="57" selection-start-line="1424" selection-start-column="57" selection-end-line="1424" selection-end-column="57" />
+        <state relative-caret-position="266">
+          <caret line="1418" column="32" selection-start-line="1418" selection-start-column="27" selection-end-line="1418" selection-end-column="32" />
           <folding>
             <element signature="e#10957#11201#0" expanded="true" />
             <element signature="e#11200#11201#0" expanded="true" />
