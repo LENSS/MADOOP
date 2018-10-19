@@ -25,6 +25,10 @@
         android:id="@+id/menu_purgeDFS"
         android:title="Purge DFS"
         />
+    <item
+        android:id="@+id/menu_trainPhotos"
+        android:title="Train Photos"
+        />
 
     <item android:id="@+id/menu_about"
         android:title="@string/menu_about" />

@@ -1,5 +1,5 @@
 # MADOOP
-This application is an example of Mobile Edge Computing using Mobile Hadoop and MapReduce. 
+This application is an example of Mobile Edge Computing using Mobile Hadoop and MapReduce.
 
 
 ## Network Architecture
@@ -29,6 +29,13 @@ This application is an example of Mobile Edge Computing using Mobile Hadoop and 
 - Also, in the same folder, create 3 empty folders: with the names: `input`, `faces` and `temp`. These 3 foders must be empty.
 - The face pictures which are to be recognized against the data base, should be stored in `/sdcard/StreamFDPic/` folder. Use command adb pull to pull the content. Check Sample photos folder.
 
+#### Special case: Training:
+- Acummulate all the photos for training in a folder called `Orig` and push the folder to phone's `/sdcard/Documents/Orig` directory `adb push Orig /sdcard/Documents`. The training photos should be named in this format: `s01_01.jpg` where `s01` is the person's identifier.
+- Create another empty folder with name `/sdcard/Documents/Train`.
+- Also, don't forget to put other files as stated in the earlier section.
+- From the menu (top-right corner), select Train Photos.
+- After training, The face database will be stored inside `/sdcard/Documents/FaceReco` folder.
+
 ## Instructions for Madoop Server
 
 #### Accessing the server
@@ -57,7 +64,7 @@ This application is an example of Mobile Edge Computing using Mobile Hadoop and 
 
 
 #### Setup for LTE interface
-- The phones connected to LTE also need this DNS service such that they can communicate using hostname.In the current setup, [NextEPC](http://nextepc.org) is used to configure the EPC. Its configuration file is stored in `/etc/nextepc/pgw.conf`. To point to the local DNS server, edit the lines under `dns:`. 
+- The phones connected to LTE also need this DNS service such that they can communicate using hostname.In the current setup, [NextEPC](http://nextepc.org) is used to configure the EPC. Its configuration file is stored in `/etc/nextepc/pgw.conf`. To point to the local DNS server, edit the lines under `dns:`.
 
 
 #### Running MADOOP Server

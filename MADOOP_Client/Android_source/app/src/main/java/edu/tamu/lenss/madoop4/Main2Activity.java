@@ -298,6 +298,7 @@ public class Main2Activity extends AppCompatActivity implements MadoopConstants 
 
     private void preProcessing(String input, String output) {
 
+
         while (!faceDetector_initialized){
             try {
                 Thread.sleep(100);
@@ -1414,6 +1415,18 @@ public class Main2Activity extends AppCompatActivity implements MadoopConstants 
 
             }
             return true;
+
+            case R.id.menu_trainPhotos: {
+                System.out.println("Training selected");
+                preProcessing(faceOriginalDir, faceTrainingDir);
+                System.out.println("Preprocessing done");
+                OpenCVFaceRecognizer.trainToModel(faceTrainingDir, faceRootDir);
+                System.out.println("Training done");
+                setText(textView_allOther, "Training done");
+
+            }
+            return true;
+
 
             case R.id.menu_about: {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss.SSSSSS");
