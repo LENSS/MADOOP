@@ -30,11 +30,11 @@ This application is an example of Mobile Edge Computing using Mobile Hadoop and 
 - The face pictures which are to be recognized against the data base, should be stored in `/sdcard/StreamFDPic/` folder. Use command adb pull to pull the content. Check Sample photos folder.
 
 #### Special case: Training:
-- Acummulate all the photos for training in a folder called `Orig` and push the folder to phone's `/sdcard/Documents/Orig` directory `adb push Orig /sdcard/Documents`. The training photos should be named in this format: `s01_01.jpg` where `s01` is the person's identifier.
-- Create another empty folder with name `/sdcard/Documents/Train`.
+- Acummulate all the photos for training in a folder called `Orig` and push the folder to phone's `/sdcard/Documents/FaceReco/Orig` directory. Also,  Create another empty folder with name `/sdcard/Documents/Train`. Use the command `adb push FaceReco /sdcard/Documents`. The training photos should be named in this format: `s01_01.jpg` where `s01` is the person's identifier.
 - Also, don't forget to put other files as stated in the earlier section.
 - From the menu (top-right corner), select Train Photos.
-- After training, The face database will be stored inside `/sdcard/Documents/FaceReco` folder.
+- After training, The `facemodel.xml` will be stored inside `/sdcard/Documents/FaceReco` folder. This file is to be copied to all the phones in the directory stated in earlier section.
+- It will take long time to process the photos and then training.
 
 ## Instructions for Madoop Server
 
@@ -80,13 +80,15 @@ This application is an example of Mobile Edge Computing using Mobile Hadoop and 
 - The MADOOP app generates logs which are stored in `sdcard/Madoop4/log`.
 - If the logfile in the phone shows error like *address already in use*, restart the phone and Madoop master.
 - At the server side, the logs are stored at ``/home/lenss_epc/madoop/hadoop-0.20.2/logs/``
+- Sometimes the EPC IP Tables creates problem in routing data from LTE to WiFi or vice versa. In this case, resetting the IP table in the EPC allows the data to be routed correctly.
+- Sometimes the application might not have allowed some permission. Go to `Setting`->`Apps`->`DistressnetNG`->`Permission` and allow all the permission.
 
 
 
 
 ## Executing The APP
-- The tasktracker and Job tracker might be running from previous use. Go to Setting->Apps->select Distressnet NG -> tap on Force Quit. This will stop all the trackers.
-- Open the Madoop app. It askes for the current IP. Check the IP address of the phone (Setting->WiFi->click on the gear icon on top->see the IP address) and save it on the APP.
+- The tasktracker and Job tracker might be running from previous use. Go to `Setting`->`Apps`->select `Distressnet NG` -> tap on Force Quit. This will stop all the trackers.
+- Open the Madoop app. It askes for the current IP. Check the IP address of the phone (`Setting`->`WiFi`->click on the gear icon on top->see the IP address) and save it on the APP. For LTE, `Setting`->`System`->`About phone`->`Status`-> `IP address`.
 - Make sure the photos are stored in the correct folder.
 - Click on Upload. It will preprocess the photos and upload to HDFS.
 - On menue item (top right corner), check the boxes for DataNode and Task Tracker.
@@ -152,3 +154,14 @@ lenss-epc
 #vm-3
 #vm-4
 ```
+
+## Statically mapping the hostnames on each devices.
+If Setting up DNS masq is troublesome, then we can run the application by statically mapping hostname to IP address on each phones. `/etc/hosts` is a read-only file in Android. We have to access using root to change this file. I used these commands:
+
+```
+adb shell
+su root
+mount -o rw,remount /system
+vi /etc/hosts
+```
+In this folder put all the hostname mapping for EPC and mobile devices.

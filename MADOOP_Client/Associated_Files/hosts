@@ -1,5 +1,4 @@
 127.0.0.1	localhost
-127.0.1.1	lenss-epc-1
 
 10.42.0.1	lenss-epc
 192.168.1.240	lenss-epc
@@ -515,30 +514,3 @@
 10.42.0.252	 phone-10-42-0-252
 10.42.0.253	 phone-10-42-0-253
 10.42.0.254	 phone-10-42-0-254
-
-
-
-
-# Old assignment by Wei
-192.168.1.11    vm-1
-192.168.1.12    vm-2
-192.168.1.13    vm-3
-192.168.1.14    vm-4
-
-
-
-
-192.168.1.131    phone-192-168-1-131
-192.168.1.114    phone-192-168-1-114
-192.168.1.115    phone-192-168-1-115
-192.168.1.61    phone-192-168-1-61
-192.168.1.62    phone-192-168-1-62
-
-
-
-# The following lines are desirable for IPv6 capable hosts
-::1     ip6-localhost ip6-loopback
-fe00::0 ip6-localnet
-ff00::0 ip6-mcastprefix
-ff02::1 ip6-allnodes
-ff02::2 ip6-allrouters
