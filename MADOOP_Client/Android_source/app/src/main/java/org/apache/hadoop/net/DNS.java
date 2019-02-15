@@ -88,22 +88,23 @@ public class DNS implements MadoopConstants{
 
 //      LOG.info("****<reverseDns>" + hostIp.toString());
       LOG.info("****<reverseDns> " + hostIp.toString());
-      return IPToolBox.RDNS.get(hostIp.toString());
+      //return IPToolBox.RDNS.get(hostIp.toString());
+      //Suman's edit
+      return hostIp.getHostName();
 
   }
 
   /**
    * Returns all the IPs associated with the provided interface, if any, in
    * textual form.
-   * 
-   * @param strInterface
-   *            The name of the network interface to query (e.g. eth0)
+   *
+
    * @return A string vector of all the IPs associated with the provided
    *         interface
    * @throws UnknownHostException
    *             If an UnknownHostException is encountered in querying the
    *             default interface
-   * 
+   *
    */
 
   public static String[] getNIFs() throws SocketException{

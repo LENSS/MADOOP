@@ -97,6 +97,8 @@ import com.daimajia.numberprogressbar.OnProgressBarListener;
 
 import edu.tamu.lenss.R;
 
+import edu.tamu.cse.lenss.gnsService.client.GnsServiceClient;
+
 
 import static org.bytedeco.javacpp.opencv_core.CV_32SC1;
 
@@ -135,7 +137,7 @@ public class Main2Activity extends AppCompatActivity implements MadoopConstants 
     private static final boolean TEST_WORDCOUNT = false;
     private static final boolean TEST_FACERECO = !TEST_WORDCOUNT;
 
-    private static String device_name = "";
+    private String device_name = "";
 
     private File mCascadeFile;
     private CascadeClassifier mJavaDetector;
@@ -766,7 +768,7 @@ public class Main2Activity extends AppCompatActivity implements MadoopConstants 
     }
 
 
-    private void showSettingIP() {
+    /*private void showSettingIP() {
 
         if (tasktracker_on || datanode_on) {
 
@@ -806,7 +808,7 @@ public class Main2Activity extends AppCompatActivity implements MadoopConstants 
         });
 
         builder.show();
-    }
+    }*/
 
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
@@ -967,10 +969,27 @@ public class Main2Activity extends AppCompatActivity implements MadoopConstants 
 
         SPHelper.init(getApplication());
 
-        String temp = SPHelper.getString("theMainIP", "");
-        if (temp=="") SPHelper.save("theMainIP", "/192.168.x.y");
+        //String temp = SPHelper.getString("theMainIP", "");
+        //if (temp=="") SPHelper.save("theMainIP", "/192.168.x.y");
 
-        showSettingIP();
+        // Suman's edit for GNS
+        //showSettingIP();
+
+        //SPHelper.save("theMainIP", "/" + "192.168.0.129");
+
+        // First get the hostname from the GNS Service
+        GnsServiceClient gnsServiceClient = new GnsServiceClient();
+        device_name = gnsServiceClient.getOwnHostName(); //"testgamma";
+        if (device_name == null)
+            finish();
+        SPHelper.save("ownHostName", device_name);
+
+        //LOG.info("theMainIP :" + SPHelper.getString("theMainIP", "").substring(1, SPHelper.getString("theMainIP", "").length()));
+        //device_name = IPToolBox.RDNS.get(SPHelper.getString("theMainIP", ""));
+
+        LOG.info("device_name :" + device_name);
+
+
 
         if (isMyServiceRunning(tasktrackerService.class)) {
             tasktracker_on = true;
@@ -1240,10 +1259,13 @@ public class Main2Activity extends AppCompatActivity implements MadoopConstants 
 //		case 0:
 //			startActivity(new Intent(getBaseContext(), MDFSSetting.class));
 //			break;
-            case R.id.menu_setip:
+
+            // Suman's edit
+            /*case R.id.menu_setip:
 
                 showSettingIP();
                 return true;
+*/
             case R.id.menu_tasktracker:
                 //        LOG.info("****<onOptionsItemSelected> menu_tasktracker is selected");
                 if (item.isChecked()) {

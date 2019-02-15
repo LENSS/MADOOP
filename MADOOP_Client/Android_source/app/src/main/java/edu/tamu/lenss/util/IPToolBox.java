@@ -14,12 +14,13 @@ public class IPToolBox {
 
     public static class RDNS{
 
-        public static String get(String ip){
-//            System.out.println(ip.substring(1,ip.length()));
+        /*public static String get(String ip){
+            System.out.println(ip.substring(1,ip.length()));
             if (ip.equals("/127.0.0.1")) return null;
+            if (ip.equals("/192.168.0.129")) return "testgamma";
             String[] temp = ip.substring(1,ip.length()).split("\\.");
             return "phone-"+temp[0]+"-"+temp[1]+"-"+temp[2]+"-"+temp[3];
-        }
+        }*/
 
     }
 

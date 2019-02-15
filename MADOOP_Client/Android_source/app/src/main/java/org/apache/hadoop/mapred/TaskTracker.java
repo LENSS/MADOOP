@@ -97,6 +97,7 @@ import org.mortbay.jetty.ResourceCache;
 
 //import static edu.tamu.lenss.madoop4.MadoopConstants.RDNS;
 import edu.tamu.lenss.util.IPToolBox;
+import java.net.InetAddress;
 
 
 /*******************************************************
@@ -437,20 +438,20 @@ public class TaskTracker
    * close().
    */
   synchronized void initialize() throws IOException {
-    // use configured nameserver & interface to get local hostname
-    this.fConf = new JobConf(originalConf);
-    if (fConf.get("slave.host.name") != null) {
-      this.localHostname = fConf.get("slave.host.name");
-    }
+      // use configured nameserver & interface to get local hostname
+      this.fConf = new JobConf(originalConf);
+      if (fConf.get("slave.host.name") != null) {
+          this.localHostname = fConf.get("slave.host.name");
+      }
 
-    LOG.info("****<initialize> localHostname: " + localHostname);
-    if (localHostname == null) {
+      LOG.info("****<initialize> localHostname: " + localHostname);
+      if (localHostname == null) {
 //      this.localHostname =
 //      DNS.getDefaultHost
 //      (fConf.get("mapred.tasktracker.dns.interface","default"),
 //       fConf.get("mapred.tasktracker.dns.nameserver","default"));
 
-//       
+//
 //        String[] ifs = DNS.getNIFs();
 //        for (int ctr = 0; ctr < ifs.length; ctr++){
 //         LOG.info("****<initialize> inf: " + ifs[ctr]);
@@ -460,27 +461,32 @@ public class TaskTracker
 //          LOG.info("****<initialize> ip: " + ips[ctr]);
 //        }
 
-       String[] hosts = DNS.getHosts(fConf.get("mapred.tasktracker.dns.interface","default"),
-                                     fConf.get("mapred.tasktracker.dns.nameserver","default"));
+          String[] hosts = DNS.getHosts(fConf.get("mapred.tasktracker.dns.interface","default"),
+                  fConf.get("mapred.tasktracker.dns.nameserver","default"));
 
-        if (hosts[0]==null){
-         String[] ips = DNS.getIPs();
-         
-         for (int ctr = 0; ctr < ips.length; ctr++){
-             LOG.info("ips :" + ips[ctr]);
+          if (hosts[0]==null){
+
+            /* String[] ips = DNS.getIPs();
+
+              for (int ctr = 0; ctr < ips.length; ctr++){
+                  LOG.info("ips :" + ips[ctr]);
 //             LOG.info("theMainIP :" + SPHelper.getString("theMainIP","").substring(1, SPHelper.getString("theMainIP","").length()));
 //             LOG.info("theMainIP: "+ SPHelper.getString("theMainIP",""));
 
-             if (ips[ctr].contains(SPHelper.getString("theMainIP","").substring(1, SPHelper.getString("theMainIP","").length()))){
-               hosts[0] = IPToolBox.RDNS.get(ips[ctr]);
-               break;
-             }
-         }
-       }
+                  if (ips[ctr].contains(SPHelper.getString("theMainIP","").substring(1, SPHelper.getString("theMainIP","").length()))){
+                      hosts[0] = IPToolBox.RDNS.get(ips[ctr]);
+                      break;
+                  }
+              }*/
 
-       this.localHostname = hosts[0];  
+              //Suman's edit
+            hosts[0] = SPHelper.getString("ownHostName","");
+              //end Suman's edit
+          }
 
-    }
+          this.localHostname = hosts[0];
+
+      }
     LOG.info("****<initialize> localHostname: " + localHostname);
  
     //check local disk

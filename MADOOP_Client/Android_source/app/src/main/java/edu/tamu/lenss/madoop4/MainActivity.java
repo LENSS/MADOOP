@@ -1021,7 +1021,7 @@ public class MainActivity extends AppCompatActivity implements MadoopConstants {
                 String m_Text = input.getText().toString();
                 SPHelper.save("theMainIP", "/" + m_Text);
                 LOG.info("theMainIP :" + SPHelper.getString("theMainIP", "").substring(1, SPHelper.getString("theMainIP", "").length()));
-                device_name = IPToolBox.RDNS.get(SPHelper.getString("theMainIP", ""));
+                //device_name = IPToolBox.RDNS.get(SPHelper.getString("theMainIP", ""));
                 LOG.info("device_name :" + device_name);
             }
         });
