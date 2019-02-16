@@ -984,6 +984,12 @@ public class Main2Activity extends AppCompatActivity implements MadoopConstants 
             finish();
         SPHelper.save("ownHostName", device_name);
 
+        String madoopServer = "lenss-epc";
+        // Now put the server name to SP helper such that this can be loaded for Configuration
+        SPHelper.save("madoop-server", madoopServer);
+
+        SPHelper.getString("madoop-server", "");
+
         //LOG.info("theMainIP :" + SPHelper.getString("theMainIP", "").substring(1, SPHelper.getString("theMainIP", "").length()));
         //device_name = IPToolBox.RDNS.get(SPHelper.getString("theMainIP", ""));
 

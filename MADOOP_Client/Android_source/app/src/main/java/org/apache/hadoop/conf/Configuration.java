@@ -72,6 +72,8 @@ import android.content.Context;
 import android.content.res.AssetManager;
 
 import edu.tamu.lenss.App;
+import com.pl.sphelper.SPHelper;
+
 
 /** 
  * Provides access to configuration parameters.
@@ -201,6 +203,8 @@ public class Configuration implements Iterable<Map.Entry<String,String>>,
   public Configuration() {
     this(true);
 //    LOG.info("In Configuration()");
+    SPHelper.init(App.get_context());
+
   }
 
   /** A new configuration where the behavior of reading from the default 
@@ -1071,9 +1075,9 @@ public class Configuration implements Iterable<Map.Entry<String,String>>,
       if (name instanceof URL) {                  // an URL resource
         URL url = (URL)name;
         if (url != null) {
-          if (!quiet) {
-            LOG.info("parsing " + url);
-          }
+
+            LOG.info("parsing " + url+" using url");
+
           doc = builder.parse(url.toString());
         }
       } else if (name instanceof String) {        // a CLASSPATH resource
@@ -1087,10 +1091,34 @@ public class Configuration implements Iterable<Map.Entry<String,String>>,
 //          doc = builder.parse(url.toString());
 //        }
 
+          /* Suman's edit
+          The Hadoop code should get the Madoop server address from Activity instead od parsing the xml files
+          */
+        if (name.equals("core-site.xml")){
+          String attr = "fs.default.name";
+          String madoop_server = SPHelper.getString("madoop-server", "");
+          String value = "hdfs://"+madoop_server+":9000/";
+          properties.setProperty(attr, value);
+          LOG.info("parsing " + (String)name +" put values from GNS");
+          return;
+        }
+
+        if (name.equals("mapred-site.xml")){
+          String attr = "mapred.job.tracker";
+          String madoop_server = SPHelper.getString("madoop-server", "");
+          String value = madoop_server+":9001";
+          properties.setProperty(attr, value);
+          LOG.info("parsing " + (String)name +" put values from GNS");
+          return;
+        }
+
+        // Suman's edit ends here
+
         AssetManager assetManager = App.get_context().getAssets();
         InputStream inputStream = assetManager.open((String)name);
         if (inputStream != null) {
-          LOG.info("parsing " + (String)name);
+          LOG.info("parsing " + (String)name +" using string");
+
           doc = builder.parse(inputStream);
         }
 
@@ -1100,9 +1128,9 @@ public class Configuration implements Iterable<Map.Entry<String,String>>,
         File file = new File(((Path)name).toUri().getPath())
           .getAbsoluteFile();
         if (file.exists()) {
-          if (!quiet) {
-            LOG.info("parsing " + file);
-          }
+
+            LOG.info("parsing " + file +" using path");
+
           InputStream in = new BufferedInputStream(new FileInputStream(file));
           try {
             doc = builder.parse(in);
@@ -1112,11 +1140,14 @@ public class Configuration implements Iterable<Map.Entry<String,String>>,
         }
       } else if (name instanceof InputStream) {
         try {
+          LOG.info("parsing  using Input stream");
           doc = builder.parse((InputStream)name);
         } finally {
           ((InputStream)name).close();
         }
       } else if (name instanceof Element) {
+        LOG.info("parsing  using Input element");
+
         root = (Element)name;
       }
 

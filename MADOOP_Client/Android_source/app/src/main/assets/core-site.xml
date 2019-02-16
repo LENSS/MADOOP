@@ -7,7 +7,7 @@
 
   <property>
     <name>fs.default.name</name>
-    <value>hdfs://lenss-epc:9000/</value>
+    <value>hdfs://lenss-epc-1:9000/</value>
   </property>
 
   
