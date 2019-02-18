@@ -50,6 +50,7 @@ import com.my.jni.dlib.IDLibFaceDetector;
 import com.my.jni.dlib.data.DLibFace;
 import com.pl.sphelper.SPHelper;
 
+import org.mortbay.log.Log;
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
@@ -793,7 +794,7 @@ public class Main2Activity extends AppCompatActivity implements MadoopConstants 
 
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_TEXT);
-        input.setText(SPHelper.getString("theMainIP", "").substring(1, SPHelper.getString("theMainIP", "").length()));
+        //input.setText(SPHelper.getString("theMainIP", "").substring(1, SPHelper.getString("theMainIP", "").length()));
         builder.setView(input);
 
         builder.setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
@@ -802,14 +803,14 @@ public class Main2Activity extends AppCompatActivity implements MadoopConstants 
                 String m_Text = input.getText().toString();
                 SPHelper.save("theMainIP", "/" + m_Text);
                 LOG.info("theMainIP :" + SPHelper.getString("theMainIP", "").substring(1, SPHelper.getString("theMainIP", "").length()));
-                device_name = IPToolBox.RDNS.get(SPHelper.getString("theMainIP", ""));
+                //device_name = IPToolBox.RDNS.get(SPHelper.getString("theMainIP", ""));
                 LOG.info("device_name :" + device_name);
             }
         });
 
         builder.show();
-    }*/
-
+    }
+*/
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -886,6 +887,8 @@ public class Main2Activity extends AppCompatActivity implements MadoopConstants 
                 mMessageReceiver);
         super.onStop();
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -973,27 +976,43 @@ public class Main2Activity extends AppCompatActivity implements MadoopConstants 
         //if (temp=="") SPHelper.save("theMainIP", "/192.168.x.y");
 
         // Suman's edit for GNS
-        //showSettingIP();
+
 
         //SPHelper.save("theMainIP", "/" + "192.168.0.129");
+
+
 
         // First get the hostname from the GNS Service
         GnsServiceClient gnsServiceClient = new GnsServiceClient();
         device_name = gnsServiceClient.getOwnHostName(); //"testgamma";
-        if (device_name == null)
-            finish();
+        if (device_name == null) {
+            Toast.makeText(getContext(), "GNS service App not started",Toast.LENGTH_LONG).show();
+            onBackPressed();
+            return;
+        }
         SPHelper.save("ownHostName", device_name);
 
-        String madoopServer = "lenss-epc";
-        // Now put the server name to SP helper such that this can be loaded for Configuration
-        SPHelper.save("madoop-server", madoopServer);
+        LOG.info("device_name :" + device_name);
 
-        SPHelper.getString("madoop-server", "");
+        // Now get the hostname of Madoop server
+        List<String> madoopServerList = gnsServiceClient.getPeerNames("madoop", "server");
+
+        if (madoopServerList.isEmpty()){
+            Toast.makeText(getContext(), "Could not find madoop server in GNS record",Toast.LENGTH_LONG).show();
+            onBackPressed();
+            return;
+
+        }
+
+        // Now put the server name to SP helper such that this can be loaded for Configuration
+        SPHelper.save("madoop-server", madoopServerList.get(0));
+
+        Log.info("Madoop server: "+ SPHelper.getString("madoop-server", ""));
 
         //LOG.info("theMainIP :" + SPHelper.getString("theMainIP", "").substring(1, SPHelper.getString("theMainIP", "").length()));
         //device_name = IPToolBox.RDNS.get(SPHelper.getString("theMainIP", ""));
 
-        LOG.info("device_name :" + device_name);
+
 
 
 
