@@ -1,0 +1,31 @@
+2019-02-18 16:22:17,867 INFO org.apache.hadoop.hdfs.server.namenode.NameNode: STARTUP_MSG: 
+/************************************************************
+STARTUP_MSG: Starting NameNode
+STARTUP_MSG:   host = lenss-epc/192.168.0.120
+STARTUP_MSG:   args = []
+STARTUP_MSG:   version = 0.20.3-dev
+STARTUP_MSG:   build =  -r ; compiled by 'wei' on Wed Mar 21 20:05:32 CDT 2018
+************************************************************/
+2019-02-18 16:22:17,939 ERROR org.apache.hadoop.hdfs.server.namenode.NameNode: java.net.BindException: Problem binding to lenss-epc/192.168.0.120:9000 : Address already in use
+	at org.apache.hadoop.ipc.Server.bind(Server.java:191)
+	at org.apache.hadoop.ipc.Server$Listener.<init>(Server.java:253)
+	at org.apache.hadoop.ipc.Server.<init>(Server.java:1026)
+	at org.apache.hadoop.ipc.RPC$Server.<init>(RPC.java:496)
+	at org.apache.hadoop.ipc.RPC.getServer(RPC.java:458)
+	at org.apache.hadoop.hdfs.server.namenode.NameNode.initialize(NameNode.java:191)
+	at org.apache.hadoop.hdfs.server.namenode.NameNode.<init>(NameNode.java:279)
+	at org.apache.hadoop.hdfs.server.namenode.NameNode.createNameNode(NameNode.java:956)
+	at org.apache.hadoop.hdfs.server.namenode.NameNode.main(NameNode.java:965)
+Caused by: java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:433)
+	at sun.nio.ch.Net.bind(Net.java:425)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+	at org.apache.hadoop.ipc.Server.bind(Server.java:188)
+	... 8 more
+
+2019-02-18 16:22:17,943 INFO org.apache.hadoop.hdfs.server.namenode.NameNode: SHUTDOWN_MSG: 
+/************************************************************
+SHUTDOWN_MSG: Shutting down NameNode at lenss-epc/192.168.0.120
+************************************************************/

@@ -1,0 +1,37 @@
+2019-02-18 16:22:23,662 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: STARTUP_MSG: 
+/************************************************************
+STARTUP_MSG: Starting DataNode
+STARTUP_MSG:   host = lenss-epc/192.168.0.120
+STARTUP_MSG:   args = []
+STARTUP_MSG:   version = 0.20.3-dev
+STARTUP_MSG:   build =  -r ; compiled by 'wei' on Wed Mar 21 20:05:32 CDT 2018
+************************************************************/
+2019-02-18 16:22:23,717 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: ****<startDataNode> machineName: lenss-epc
+2019-02-18 16:22:23,722 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: ****<startDataNode> nameNodeAddr: lenss-epc/192.168.0.120:9000
+2019-02-18 16:22:23,722 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: ****<startDataNode> socAddr: /0.0.0.0:50010
+2019-02-18 16:22:23,796 INFO org.apache.hadoop.security.UserGroupInformation: Unix Login: sbhunia,sbhunia,adm,cdrom,sudo,dip,plugdev,lpadmin,sambashare,vboxsf
+2019-02-18 16:22:23,829 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: ****<startDataNode> simulatedFSDataset: false
+2019-02-18 16:22:23,831 INFO org.apache.hadoop.hdfs.server.common.Storage: Storage directory /tmp/hadoop/hdfs/data is not formatted.
+2019-02-18 16:22:23,831 INFO org.apache.hadoop.hdfs.server.common.Storage: Formatting ...
+2019-02-18 16:22:23,858 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Registered FSDatasetStatusMBean
+2019-02-18 16:22:23,860 ERROR org.apache.hadoop.hdfs.server.datanode.DataNode: java.net.BindException: Problem binding to /0.0.0.0:50010 : Address already in use
+	at org.apache.hadoop.ipc.Server.bind(Server.java:191)
+	at org.apache.hadoop.hdfs.server.datanode.DataNode.startDataNode(DataNode.java:314)
+	at org.apache.hadoop.hdfs.server.datanode.DataNode.<init>(DataNode.java:216)
+	at org.apache.hadoop.hdfs.server.datanode.DataNode.makeInstance(DataNode.java:1292)
+	at org.apache.hadoop.hdfs.server.datanode.DataNode.instantiateDataNode(DataNode.java:1247)
+	at org.apache.hadoop.hdfs.server.datanode.DataNode.createDataNode(DataNode.java:1255)
+	at org.apache.hadoop.hdfs.server.datanode.DataNode.main(DataNode.java:1377)
+Caused by: java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:433)
+	at sun.nio.ch.Net.bind(Net.java:425)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+	at org.apache.hadoop.ipc.Server.bind(Server.java:188)
+	... 6 more
+
+2019-02-18 16:22:23,860 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: SHUTDOWN_MSG: 
+/************************************************************
+SHUTDOWN_MSG: Shutting down DataNode at lenss-epc/192.168.0.120
+************************************************************/
