@@ -2,6 +2,8 @@
 This application is an example of Mobile Edge Computing using Mobile Hadoop and MapReduce.
 
 
+`conf/slaves`
+
 ## Network Architecture
 
 - The Network consists of mainly these components:
