@@ -4,6 +4,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "edu.tamu.lenss.distressnet_ng"
+        setProperty("archivesBaseName", "Madoop")
         minSdkVersion 24
         targetSdkVersion 27
         buildConfigField "long", "TIMESTAMP", System.currentTimeMillis() + "L"
