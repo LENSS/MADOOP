@@ -16,17 +16,21 @@ public interface MadoopConstants {
 
   public String AppName = "Madoop4";
 //  public static final String webappsDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Madoop4/tasktracker/webapps";
-  public static final String madoopDir = Environment.getExternalStorageDirectory().getAbsolutePath() +
-        File.separator + AppName;
-  public static final String madoopDocuments = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath() +
+  //public static final String madoopDir = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + AppName;
+
+    public static final String madoopDir = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator +"distressnet"+ File.separator + AppName;
+
+    public static final String madoopDocuments = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath() +
           File.separator + AppName;
-  public static final String faceRootDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath() +
+  /*public static final String faceRootDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath() +
           File.separator + "FaceReco";
+  */
+  public static final String faceRootDir = madoopDir+ File.separator+"FaceReco";
   public static final String faceTrainingDir = faceRootDir + File.separator + "Train";
   public static final String faceOriginalDir = faceRootDir + File.separator + "Orig";
 
   
-  public static final String StreamInput = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "StreamFDPic";
+  public static final String StreamInput = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "/distressnet/MStorm/StreamFDPic";
 
 //  public static Map<String, String> RDNS;
 

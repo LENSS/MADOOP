@@ -11,7 +11,7 @@
 
 <property>
   <name>hadoop.tmp.dir</name>
-  <value>/storage/emulated/0/Madoop4/tmp</value>
+  <value>/storage/emulated/0/distressnet/Madoop4/tmp</value>
   <description>A base for other temporary directories.</description>
 </property>
 
