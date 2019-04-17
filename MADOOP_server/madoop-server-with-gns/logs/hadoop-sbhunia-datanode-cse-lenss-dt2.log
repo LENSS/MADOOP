@@ -1,0 +1,45 @@
+2019-03-20 23:39:38,126 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: STARTUP_MSG: 
+/************************************************************
+STARTUP_MSG: Starting DataNode
+STARTUP_MSG:   host = cse-lenss-dt2/127.0.1.1
+STARTUP_MSG:   args = []
+STARTUP_MSG:   version = 0.20.3-dev
+STARTUP_MSG:   build =  -r ; compiled by 'wei' on Wed Mar 21 20:05:32 CDT 2018
+************************************************************/
+2019-03-20 23:39:38,155 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: ****<startDataNode> machineName: cse-lenss-dt2
+2019-03-20 23:39:38,160 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: ****<startDataNode> nameNodeAddr: lenss-epc/127.0.0.1:9000
+2019-03-20 23:39:38,160 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: ****<startDataNode> socAddr: /0.0.0.0:50010
+2019-03-20 23:39:38,188 INFO org.apache.hadoop.security.UserGroupInformation: Unix Login: sbhunia,sbhunia,adm,cdrom,sudo,dip,plugdev,lpadmin,sambashare
+2019-03-20 23:39:38,203 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: ****<startDataNode> simulatedFSDataset: false
+2019-03-20 23:39:38,205 INFO org.apache.hadoop.hdfs.server.common.Storage: Storage directory /tmp/hadoop/hdfs/data is not formatted.
+2019-03-20 23:39:38,205 INFO org.apache.hadoop.hdfs.server.common.Storage: Formatting ...
+2019-03-20 23:39:38,251 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Registered FSDatasetStatusMBean
+2019-03-20 23:39:38,253 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: ****<startDataNode> selfAddr: /0:0:0:0:0:0:0:0:50010
+2019-03-20 23:39:38,253 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Opened info server at 50010
+2019-03-20 23:39:38,254 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Balancing bandwith is 1048576 bytes/s
+2019-03-20 23:39:38,256 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: ****<startDataNode> infoSocAddr: /0.0.0.0:50075
+2019-03-20 23:39:48,281 INFO org.mortbay.log: Logging to org.slf4j.impl.Log4jLoggerAdapter(org.mortbay.log) via org.mortbay.log.Slf4jLog
+2019-03-20 23:39:48,282 INFO org.apache.hadoop.http.HttpServer: ****<getWebAppsPath> url: file:/home/sbhunia/Desktop/git_problem/MADOOP/MADOOP_server/madoop-server-with-gns/build/webapps
+2019-03-20 23:39:48,303 INFO org.apache.hadoop.http.HttpServer: Port returned by webServer.getConnectors()[0].getLocalPort() before open() is -1. Opening the listener on 50075
+2019-03-20 23:39:48,303 INFO org.apache.hadoop.http.HttpServer: listener.getLocalPort() returned 50075 webServer.getConnectors()[0].getLocalPort() returned 50075
+2019-03-20 23:39:48,304 INFO org.apache.hadoop.http.HttpServer: Jetty bound to port 50075
+2019-03-20 23:39:48,304 INFO org.mortbay.log: jetty-6.1.26
+2019-03-20 23:39:48,393 INFO org.mortbay.log: Started SelectChannelConnector@0.0.0.0:50075
+2019-03-20 23:39:48,394 INFO org.apache.hadoop.metrics.jvm.JvmMetrics: Initializing JVM Metrics with processName=DataNode, sessionId=null
+2019-03-20 23:39:48,404 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: ****<startDataNode> ipcAddr: /0.0.0.0:50020
+2019-03-20 23:39:58,418 INFO org.apache.hadoop.ipc.metrics.RpcMetrics: Initializing RPC Metrics with hostName=DataNode, port=50020
+2019-03-20 23:39:58,420 INFO org.apache.hadoop.ipc.Server: IPC Server Responder: starting
+2019-03-20 23:39:58,420 INFO org.apache.hadoop.ipc.Server: IPC Server listener on 50020: starting
+2019-03-20 23:39:58,421 INFO org.apache.hadoop.ipc.Server: IPC Server handler 0 on 50020: starting
+2019-03-20 23:39:58,421 INFO org.apache.hadoop.ipc.Server: IPC Server handler 1 on 50020: starting
+2019-03-20 23:39:58,421 INFO org.apache.hadoop.ipc.Server: IPC Server handler 2 on 50020: starting
+2019-03-20 23:39:58,421 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: dnRegistration = DatanodeRegistration(cse-lenss-dt2:50010, storageID=, infoPort=50075, ipcPort=50020)
+2019-03-20 23:39:58,440 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: New storage id DS-1685253878-127.0.1.1-50010-1553143198427 is assigned to data-node 127.0.0.1:50010
+2019-03-20 23:39:58,440 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: DatanodeRegistration(127.0.0.1:50010, storageID=DS-1685253878-127.0.1.1-50010-1553143198427, infoPort=50075, ipcPort=50020)In DataNode.run, data = FSDataset{dirpath='/tmp/hadoop/hdfs/data/current'}
+2019-03-20 23:39:58,440 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: using BLOCKREPORT_INTERVAL of 3600000msec Initial delay: 0msec
+2019-03-20 23:39:58,444 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: BlockReport of 0 blocks got processed in 1 msecs
+2019-03-20 23:39:58,444 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Starting Periodic block scanner.
+2019-03-20 23:57:42,030 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: SHUTDOWN_MSG: 
+/************************************************************
+SHUTDOWN_MSG: Shutting down DataNode at cse-lenss-dt2/127.0.1.1
+************************************************************/

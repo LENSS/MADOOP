@@ -1,0 +1,32 @@
+2019-03-20 23:39:39,103 INFO org.apache.hadoop.mapred.JobTracker: STARTUP_MSG: 
+/************************************************************
+STARTUP_MSG: Starting JobTracker
+STARTUP_MSG:   host = cse-lenss-dt2/127.0.1.1
+STARTUP_MSG:   args = []
+STARTUP_MSG:   version = 0.20.3-dev
+STARTUP_MSG:   build =  -r ; compiled by 'wei' on Wed Mar 21 20:05:32 CDT 2018
+************************************************************/
+2019-03-20 23:39:39,138 INFO org.apache.hadoop.mapred.JobTracker: Scheduler configured with (memSizeForMapSlotOnJT, memSizeForReduceSlotOnJT, limitMaxMemForMapTasks, limitMaxMemForReduceTasks) (-1, -1, -1, -1)
+2019-03-20 23:39:39,148 FATAL org.apache.hadoop.mapred.JobTracker: java.net.BindException: Problem binding to lenss-epc/127.0.0.1:9001 : Address already in use
+	at org.apache.hadoop.ipc.Server.bind(Server.java:191)
+	at org.apache.hadoop.ipc.Server$Listener.<init>(Server.java:253)
+	at org.apache.hadoop.ipc.Server.<init>(Server.java:1026)
+	at org.apache.hadoop.ipc.RPC$Server.<init>(RPC.java:496)
+	at org.apache.hadoop.ipc.RPC.getServer(RPC.java:458)
+	at org.apache.hadoop.mapred.JobTracker.<init>(JobTracker.java:1595)
+	at org.apache.hadoop.mapred.JobTracker.startTracker(JobTracker.java:183)
+	at org.apache.hadoop.mapred.JobTracker.startTracker(JobTracker.java:175)
+	at org.apache.hadoop.mapred.JobTracker.main(JobTracker.java:3702)
+Caused by: java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:433)
+	at sun.nio.ch.Net.bind(Net.java:425)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+	at org.apache.hadoop.ipc.Server.bind(Server.java:188)
+	... 8 more
+
+2019-03-20 23:39:39,148 INFO org.apache.hadoop.mapred.JobTracker: SHUTDOWN_MSG: 
+/************************************************************
+SHUTDOWN_MSG: Shutting down JobTracker at cse-lenss-dt2/127.0.1.1
+************************************************************/
