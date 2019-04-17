@@ -122,7 +122,7 @@ public class DatanodeID implements WritableComparable<DatanodeID> {
   public int getPort() {
     int colon = name.indexOf(":");
     if (colon < 0) {
-      return 50010; // default port.
+      return 60010; // default port.
     }
     return Integer.parseInt(name.substring(colon+1));
   }

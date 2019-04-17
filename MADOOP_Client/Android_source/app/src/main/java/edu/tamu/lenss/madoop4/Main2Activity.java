@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -25,6 +26,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -58,19 +60,26 @@ import org.opencv.objdetect.CascadeClassifier;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.net.InetAddress;
+import java.net.SocketException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import edu.tamu.cse.lenss.gnsService.client.GnsServiceClient;
+import edu.tamu.cse.lenss.gnsService.server.GNSServiceUtils;
 import edu.tamu.lenss.util.DFSFiles;
 import edu.tamu.lenss.util.IPToolBox;
 import edu.tamu.lenss.util.MyFiles;
@@ -106,8 +115,8 @@ public class Main2Activity extends AppCompatActivity implements MadoopConstants 
 
     private static final String FACE68_FILE = "shape_predictor_68_face_landmarks.dat";
     private final SparseArray<DLibFace> mDetFaces = new SparseArray<>();
-    private final File docu = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
-    private final File down = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+    //private final File docu = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+    //private final File down = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
     IDLibFaceDetector mLandmarksDetector;
     private Detector<Face> faceDetector;
 
@@ -695,7 +704,11 @@ public class Main2Activity extends AppCompatActivity implements MadoopConstants 
                     }
                     else {
                         // Init the face detector.
-                        File face68ModelPath = new File(docu.getAbsolutePath() + File.separator + AppName + File.separator + FACE68_FILE);
+
+                        //Suman's edit
+                        //File face68ModelPath = new File(docu.getAbsolutePath() + File.separator + AppName + File.separator + FACE68_FILE);
+                        File face68ModelPath = new File(madoopDocuments + File.separator + FACE68_FILE);
+
 
                         if (!face68ModelPath.exists()) {
 
@@ -784,7 +797,59 @@ public class Main2Activity extends AppCompatActivity implements MadoopConstants 
             return;
         }
 
-       AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        // First, get own IP addresses
+        List<InetAddress> ips= new ArrayList<InetAddress>();
+        List<String> madoopServerList = new ArrayList<String>();
+        try {
+            ips = GNSServiceUtils.getOwnIPv4s();
+            LOG.debug("Got own IPS: "+ips.toString());
+
+            GnsServiceClient gnsServiceClient = new GnsServiceClient();
+            madoopServerList = gnsServiceClient.getPeerNames("madoop", "server");
+            LOG.debug("Got the Madoop Server: "+madoopServerList.toString());
+
+
+        } catch (SocketException e) {
+            LOG.fatal("Problem getting either own IPs or GNS server ", e);
+        }
+
+        if ( ips.isEmpty() || madoopServerList.isEmpty()){
+            LOG.fatal("could not retrieve own IP list or connecting to GNS");
+            Toast.makeText(getContext(), "could not retrieve own IP list or find server",Toast.LENGTH_LONG).show();
+            onBackPressed();
+            return;
+        }
+
+        // Set the madoop server name in the configuration file
+        modifyHadoopConfig(madoopServerList.get(0));
+
+        // Now, check for own IPs
+        final String[] ownIPs = new String[ips.size()];
+        for (int i =0; i <ips.size(); i++)
+            ownIPs[i] = ips.get(i).toString();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Select the IP you want to use as own IP");
+        builder.setCancelable(false);
+
+        builder.setSingleChoiceItems(ownIPs, 0, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // user checked an item
+                String ownIP = ownIPs[which];
+                LOG.info("You selected IP:" + ownIP );
+
+                SPHelper.save("theMainIP", ownIP);
+                device_name = IPToolBox.RDNS.get(SPHelper.getString("theMainIP", ""));
+                LOG.info("device_name :" + device_name);
+
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+
+        /*
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Input Local IP address");
         builder.setMessage("(Please check your local IP in Android Settings)");
         builder.setCancelable(false);
@@ -806,6 +871,7 @@ public class Main2Activity extends AppCompatActivity implements MadoopConstants 
         });
 
         builder.show();
+        */
     }
 
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
@@ -967,8 +1033,13 @@ public class Main2Activity extends AppCompatActivity implements MadoopConstants 
 
         SPHelper.init(getApplication());
 
-        String temp = SPHelper.getString("theMainIP", "");
-        if (temp=="") SPHelper.save("theMainIP", "/192.168.x.y");
+
+        //Suman's edit starts here
+
+        //String temp = SPHelper.getString("theMainIP", "");
+        //if (temp=="") SPHelper.save("theMainIP", "/192.168.x.y");
+
+        //Suman's edit ends here
 
         showSettingIP();
 
@@ -1456,6 +1527,69 @@ public class Main2Activity extends AppCompatActivity implements MadoopConstants 
                 return super.onOptionsItemSelected(item);
         }
 
+    }
+
+    void makeDirectories(String path){
+        File directory = new File(path);
+        if (! directory.exists()) // Create the directory if it does not exist
+            directory.mkdir();
+    }
+
+    /**
+     * This function modify the Madoop configuration and set the correct madoop server
+     * hostname
+     * @param madoopServerName
+     */
+    private void modifyHadoopConfig(String madoopServerName) {
+        String distressnetDir = Environment.getExternalStorageDirectory().toString() + File.separator + "distressnet";
+        makeDirectories(distressnetDir);
+
+        String madoopDir = distressnetDir+"/Madoop4";
+        makeDirectories(madoopDir);
+
+        String configDir = madoopDir+"/config";
+        makeDirectories(configDir);
+
+
+
+
+
+        AssetManager assetManager = getAssets();
+        String[] files = null;
+        try {
+            files = assetManager.list("");
+        } catch (IOException e) {
+            Log.e("tag", "Failed to get asset file list.", e);
+        }
+        for(String filename : files) {
+            if (!filename.endsWith(".xml")) // no need to copy anything other than xml files
+                continue;
+            LOG.debug("Trying to copy file: "+ filename);
+            try {
+                InputStream in = assetManager.open(filename);
+                BufferedReader br  = new BufferedReader(new InputStreamReader(in));
+
+                File outFile = new File(configDir, filename);
+
+                BufferedWriter bw = new BufferedWriter(new OutputStreamWriter( new FileOutputStream(outFile)));
+
+                String line;
+                while ((line = br.readLine()) != null) {
+                    // The current configuration contains lenss-epc as the server. Replace it with the
+                    // actual server discovered through service discovery
+                    line=line.replace("lenss-epc", madoopServerName);
+                    bw.append(line+"\n");
+                }
+
+                //copyFile(in, out);
+                in.close();
+                br.close();
+                bw.flush();
+                bw.close();
+            } catch(IOException e) {
+                Log.e("tag", "Failed to copy asset file: " + filename, e);
+            }
+        }
     }
 
 }

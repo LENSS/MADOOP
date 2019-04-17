@@ -19,7 +19,7 @@ public class JournalLogger extends ILogger
 
     private void _getLogger(Class clazz, String file) {
         final LogConfigurator logConfigurator = new LogConfigurator();
-        logConfigurator.setFileName(Environment.getExternalStorageDirectory().toString() + File.separator + "Madoop4/log/" + file);
+        logConfigurator.setFileName(Environment.getExternalStorageDirectory().toString() + File.separator + "distressnet/Madoop4/log/" + file);
         logConfigurator.setRootLevel(Level.INFO);
 //        logConfigurator.setLevel("edu.tamu.lenss", Level.INFO);
         logConfigurator.setUseFileAppender(true);
