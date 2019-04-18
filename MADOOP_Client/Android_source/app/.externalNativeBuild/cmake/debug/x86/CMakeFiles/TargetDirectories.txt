@@ -1,0 +1,3 @@
+/home/sbhunia/MADOOP/MADOOP_Client/Android_source/app/.externalNativeBuild/cmake/debug/x86/CMakeFiles/rebuild_cache.dir
+/home/sbhunia/MADOOP/MADOOP_Client/Android_source/app/.externalNativeBuild/cmake/debug/x86/CMakeFiles/edit_cache.dir
+/home/sbhunia/MADOOP/MADOOP_Client/Android_source/app/.externalNativeBuild/cmake/debug/x86/CMakeFiles/native-lib.dir

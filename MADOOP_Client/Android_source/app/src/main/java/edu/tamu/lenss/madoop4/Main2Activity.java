@@ -955,6 +955,12 @@ public class Main2Activity extends AppCompatActivity implements MadoopConstants 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //Suman's edit
+        //LogFactory.AndroidLogcat = false;
+        LogFactory.LogFile = madoopDir+File.separator+"main2Activity.log";
+        LOG.info("Starting Main2Activity");
+        //Suman's edit
+
         setContentView(R.layout.activity_main2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

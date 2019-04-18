@@ -43,8 +43,8 @@ This application is an example of Mobile Edge Computing using Mobile Hadoop and 
 
 ## Executing The APP
 - The tasktracker and Job tracker might be running from previous use. Go to `Setting`->`Apps`->select `Distressnet NG` -> tap on Force Quit. This will stop all the trackers.
-- Open the Madoop app. It askes for the current IP. Check the IP address of the phone (`Setting`->`WiFi`->click on the gear icon on top->see the IP address) and save it on the APP. For LTE, `Setting`->`System`->`About phone`->`Status`-> `IP address`.
 - Make sure the photos are stored in the correct folder.
+- Clik on menu and then purge DFS.
 - Click on Upload. It will preprocess the photos and upload to HDFS.
 - On menue item (top right corner), check the boxes for DataNode and Task Tracker.
 - click on `Go` button. It will do the face recognition and show the detected face with their name from a face database.  
@@ -71,20 +71,24 @@ This application is an example of Mobile Edge Computing using Mobile Hadoop and 
 
 #### Setup for DNS (through GNS)
 - If the WiFi phones did not get the correct DNS address where the GNS server is running, statically assign the proper address.
-- The phones connected to LTE also need this DNS service such that they can communicate using hostname.In the current setup, [NextEPC](http://nextepc.org) is used to configure the EPC. Its configuration file is stored in `/etc/nextepc/pgw.conf`. To point to the local DNS server, edit the lines under `dns:`.
+- The phones connected to LTE also need this DNS service such that they can communicate using hostname. In the current setup, [NextEPC](http://nextepc.org) is used to configure the EPC. Its configuration file is stored in `/etc/nextepc/pgw.conf`. To point to the local DNS server, edit the lines under `dns:`.
 
+
+#### Building the executable
+- Get the source code from Github LENSS MADOOP repository.
+- Build the source code. (go to the hadoop-0.20.2 folder and run `ant`)
 
 #### Running MADOOP Server
-- Get the source code from Github. `git clone https://github.tamu.edu/sbhunia/MADOOP_server`
-- Build the source code. (go to the hadoop-0.20.2 folder and run `ant`)
+- Get the `madoop-server-with-gns.tar.gz` from the github repository and extract the files.
 - In conf folder of the Android APP, in file `mapred-site.xml`, replace "lenss_epc" with the new machine name (same as the account name used in the GNS-service-desktop). Same applies to another two files: `core-site.xml` and `slaves`.
 - The hadoop server tries to logon to the own computer via ssh to start the services. Thus it would be helpful to store the ssl keys (ssh-keygen and ssh-copy-id).
-- To run madoop, just type ``./bootstrap.sh reset2`` in madoop root folder.
+- To run madoop, you can use ``sudo ./madoop_startup.sh start`` and for stopping the service, use `sudo ./madoop_startup.sh stop`
+
 
 
 
 #### Troubleshooting
-- The MADOOP app generates logs which are stored in `sdcard/Madoop4/log`.
+- The MADOOP app generates logs which are stored in `/sdcard/distressnet/Madoop4/log`.
 - If the logfile in the phone shows error like *address already in use*, restart the phone and Madoop master.
 - At the server side, the logs are stored at ``/home/lenss_epc/madoop/hadoop-0.20.2/logs/``
 - Sometimes the EPC IP Tables creates problem in routing data from LTE to WiFi or vice versa. In this case, resetting the IP table in the EPC allows the data to be routed correctly.
