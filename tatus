@@ -1,0 +1,95 @@
+[33mcommit 467e03180e6405b5d547599cba51866a9c010523[m
+Author: sbhunia <sbhunia@tamu.edu>
+Date:   Thu Apr 18 11:51:46 2019 -0500
+
+    minor
+
+[33mcommit c5fbd31aa113c3dfd873d513aec188bea0d79ca7[m
+Author: sbhunia <sbhunia@tamu.edu>
+Date:   Wed Apr 17 14:01:02 2019 -0500
+
+    updated gitignore
+
+[33mcommit d360cc8cf1d7fb4efc649d524c692be2ea533073[m
+Author: sbhunia <sbhunia@tamu.edu>
+Date:   Wed Apr 17 13:58:42 2019 -0500
+
+    updated readme
+
+[33mcommit 41bbd5511ff94147b41dfbc14e369b329e2d4318[m
+Author: sbhunia <sbhunia@tamu.edu>
+Date:   Tue Apr 16 21:22:39 2019 -0500
+
+    GNS integration
+
+[33mcommit fa59e910ef53bd8fb090456ff44f0f67ff44e981[m
+Author: sbhunia <sbhunia@tamu.edu>
+Date:   Wed Oct 24 15:10:46 2018 -0500
+
+    After the experiments.
+
+[33mcommit ca84dc301db3c33b811007394c14988b6fe9bad8[m
+Author: sbhunia <sbhunia@tamu.edu>
+Date:   Fri Oct 19 17:55:16 2018 -0500
+
+    New facemodel added. This is the trained model for new faces
+
+[33mcommit 8d1499155c48d384fd845c7e482228cd1720e67a[m
+Author: sbhunia <sbhunia@tamu.edu>
+Date:   Fri Oct 19 14:04:11 2018 -0500
+
+    Training menu added
+
+[33mcommit 82a1d536e4d913db04c969107d5ef29d68e64149[m
+Author: sbhunia <sbhunia@tamu.edu>
+Date:   Wed Oct 17 14:43:08 2018 -0500
+
+    Update README.md
+
+[33mcommit b3669f60a8a962e62bc295dcab732b9d09baee18[m
+Author: sbhunia <sbhunia@tamu.edu>
+Date:   Tue Oct 16 18:19:57 2018 -0500
+
+    Added the APK file
+
+[33mcommit b441ced6409130a417237972855f0f7bb9e95327[m
+Author: sbhunia <sbhunia@tamu.edu>
+Date:   Tue Oct 16 18:10:12 2018 -0500
+
+    little update
+
+[33mcommit 03f8b0ba7271e6b8d9816fed47a39502c7adc295[m
+Author: sbhunia <sbhunia@tamu.edu>
+Date:   Tue Oct 16 18:07:32 2018 -0500
+
+    little update
+
+[33mcommit 68523d1140ecb0972f974165e780a0f64225bee0[m
+Author: sbhunia <sbhunia@tamu.edu>
+Date:   Tue Oct 16 17:54:21 2018 -0500
+
+    Added associated Face database and other folders
+
+[33mcommit 93e24c5018b9adeef4ef0a21df27f801ef6ad45c[m
+Author: sbhunia <sbhunia@tamu.edu>
+Date:   Tue Oct 16 17:51:19 2018 -0500
+
+    Added README
+
+[33mcommit d4202044b99beddee984c5047f17893c3ef91be4[m
+Author: sbhunia <sbhunia@tamu.edu>
+Date:   Tue Oct 16 17:47:08 2018 -0500
+
+    Added Server code
+
+[33mcommit 1c6407e1f37d94ae2e2f243243bb98991238b63b[m
+Author: sbhunia <sbhunia@tamu.edu>
+Date:   Tue Oct 16 17:42:10 2018 -0500
+
+    Moved Android source to subfolder
+
+[33mcommit 52c8ead1042abc60bc83f1239e920b906b3e0fed[m
+Author: Wei Zhang <charleyhuman@tamu.edu>
+Date:   Sat Oct 13 13:01:25 2018 -0500
+
+    Initial commit
