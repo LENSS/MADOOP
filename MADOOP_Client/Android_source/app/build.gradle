@@ -52,5 +52,5 @@ dependencies {
     compile project(path: ':sphelper')
     compile 'com.daimajia.numberprogressbar:library:1.4@aar'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    implementation files('libs/GnsService-client-api.jar')
+    implementation files('libs/EdgeKeeper-client.jar')
 }

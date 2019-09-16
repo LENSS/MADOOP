@@ -78,36 +78,23 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import edu.tamu.cse.lenss.gnsService.client.GnsServiceClient;
-import edu.tamu.cse.lenss.gnsService.server.GNSServiceUtils;
+import edu.tamu.cse.lenss.edgeKeeper.client.EKClient;
+import edu.tamu.cse.lenss.edgeKeeper.utils.EKUtils;
 import edu.tamu.lenss.util.DFSFiles;
 import edu.tamu.lenss.util.IPToolBox;
 import edu.tamu.lenss.util.MyFiles;
 
-import com.pl.sphelper.SPHelper;
-
-import edu.tamu.lenss.util.AndroidLogger;
-import edu.tamu.lenss.util.DFSFiles;
-import edu.tamu.lenss.util.MyFiles;
 import edu.tamu.lenss.util.ILogger;
 import edu.tamu.lenss.util.LogFactory;
-import edu.tamu.lenss.util.IPToolBox;
-//import org.apache.commons.logging.Log;
-//import org.apache.commons.logging.LogFactory;
-import java.net.URI;
-import java.util.List;
 import java.util.Map;
 
-import org.bytedeco.javacpp.opencv_face.FaceRecognizer;
 
 
 import com.daimajia.numberprogressbar.NumberProgressBar;
-import com.daimajia.numberprogressbar.OnProgressBarListener;
 
 import edu.tamu.lenss.R;
 
 
-import static org.bytedeco.javacpp.opencv_core.CV_32SC1;
 
 
 
@@ -797,36 +784,28 @@ public class Main2Activity extends AppCompatActivity implements MadoopConstants 
             return;
         }
 
-        // First, get own IP addresses
-        List<InetAddress> ips= new ArrayList<InetAddress>();
-        List<String> madoopServerList = new ArrayList<String>();
-        try {
-            ips = GNSServiceUtils.getOwnIPv4s();
-            LOG.debug("Got own IPS: "+ips.toString());
+        List<String> ownIPList  = EKUtils.getOwnIPv4s();
+        LOG.debug("Got own IPS: "+ownIPList.toString());
 
-            GnsServiceClient gnsServiceClient = new GnsServiceClient();
-            madoopServerList = gnsServiceClient.getPeerNames("madoop", "server");
-            LOG.debug("Got the Madoop Server: "+madoopServerList.toString());
+        List<String> madoopServerList  = EKClient.getPeerNames("madoop", "server");
+        LOG.debug("Got the Madoop Server: "+madoopServerList.toString());
 
-
-        } catch (SocketException e) {
-            LOG.fatal("Problem getting either own IPs or GNS server ", e);
-        }
-
-        if ( ips.isEmpty() || madoopServerList.isEmpty()){
+        if ( ownIPList.isEmpty() || madoopServerList.isEmpty()){
             LOG.fatal("could not retrieve own IP list or connecting to GNS");
             Toast.makeText(getContext(), "could not retrieve own IP list or find server",Toast.LENGTH_LONG).show();
             onBackPressed();
             return;
         }
 
+
         // Set the madoop server name in the configuration file
         modifyHadoopConfig(madoopServerList.get(0));
 
         // Now, check for own IPs
-        final String[] ownIPs = new String[ips.size()];
-        for (int i =0; i <ips.size(); i++)
-            ownIPs[i] = ips.get(i).toString();
+        final String[] ownIPs = new String[ownIPList.size()];
+        for (int i =0; i <ownIPList.size(); i++)
+            ownIPs[i] = ownIPList.get(i);
+
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Select the IP you want to use as own IP");
@@ -839,7 +818,7 @@ public class Main2Activity extends AppCompatActivity implements MadoopConstants 
                 String ownIP = ownIPs[which];
                 LOG.info("You selected IP:" + ownIP );
 
-                SPHelper.save("theMainIP", ownIP);
+                SPHelper.save("theMainIP", "/"+ownIP); // Add "/" because Madoop uses InetAddress toString method in other code
                 device_name = IPToolBox.RDNS.get(SPHelper.getString("theMainIP", ""));
                 LOG.info("device_name :" + device_name);
 

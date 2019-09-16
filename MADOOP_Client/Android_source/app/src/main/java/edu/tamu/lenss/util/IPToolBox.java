@@ -5,7 +5,8 @@ import android.util.Log;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import edu.tamu.cse.lenss.gnsService.client.GnsServiceClient;
+
+import edu.tamu.cse.lenss.edgeKeeper.client.EKClient;
 
 
 /**
@@ -21,7 +22,7 @@ public class IPToolBox {
     public static class RDNS{
 
         public static String get(String ip){
-            GnsServiceClient gnsServiceClient = new GnsServiceClient();
+            //GnsServiceClient gnsServiceClient = new GnsServiceClient();
             String actualIP = ip.substring(1);
             Log.d("DEBUG","Suman actual ip:"+ actualIP);
 
@@ -29,14 +30,14 @@ public class IPToolBox {
             if (ip.equals("/127.0.0.1")) return null;
 
 
-            List<String> hostnames = gnsServiceClient.getAccountNamebyIP(actualIP);
+            List<String> hostnames = EKClient.getAccountNamebyIP(actualIP);
             Log.d("DEBUG","Suman Hostname obtained from GNS:"+ hostnames.toString());
 
 
             //String[] temp = ip.substring(1,ip.length()).split("\\.");
             //return "phone-"+temp[0]+"-"+temp[1]+"-"+temp[2]+"-"+temp[3];
             if (hostnames.size()==0){
-                Log.d("FATAL", "Could not query reverse DNS to the GNS service");
+                Log.d("FATAL", "Could not query reverse DNS to the GNS service for IP:"+ip );
                 return null;
             }
             else
